@@ -13,6 +13,7 @@ class HomePage:
     txtAccountDeleted = (By.CSS_SELECTOR, "h2[data-qa='account-deleted']")
     btnDeleteAccountContinue = (By.CSS_SELECTOR, "a[data-qa='continue-button']")
     btnLogout = (By.XPATH, "//ul[@class='nav navbar-nav']/li[4]")
+    btnContactUs = (By.XPATH, "//ul[@class='nav navbar-nav']/li[8]")
 
 
     def textHomeMethod(self):
@@ -35,6 +36,9 @@ class HomePage:
 
     def btnLogoutMethod(self):
         return self.driver.find_element(*HomePage.btnLogout)
+
+    def btnContactUsMethod(self):
+        return self.driver.find_element(*HomePage.btnContactUs)
 
 
 

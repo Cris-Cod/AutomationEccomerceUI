@@ -15,6 +15,7 @@ class Login:
     inputPasswordLoggin = (By.CSS_SELECTOR, "input[data-qa='login-password']")
     btnLogin = (By.CSS_SELECTOR, "button[data-qa='login-button']")
     txtIncorrect = (By.XPATH, "//div[@class='login-form']/form/p")
+    txtSingUpIncorrect = (By.XPATH, "//div[@class='signup-form']/form/p")
 
 
     def txtSingUpMethod(self):
@@ -43,3 +44,6 @@ class Login:
 
     def txtIncorrectMethod(self):
         return self.driver.find_element(*Login.txtIncorrect)
+
+    def txtSingUpIncorrectMethod(self):
+        return self.driver.find_element(*Login.txtSingUpIncorrect)
