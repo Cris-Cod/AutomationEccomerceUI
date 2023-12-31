@@ -18,3 +18,7 @@ class BaseClass:
     def verifyLinkPresence(self, text):
         wait = WebDriverWait(self.driver, 10)
         wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT, text)))
+
+    def acceptAlert(self):
+        alert = self.driver.switch_to.alert
+        alert.accept()

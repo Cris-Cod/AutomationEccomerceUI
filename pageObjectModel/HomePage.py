@@ -14,6 +14,8 @@ class HomePage:
     btnDeleteAccountContinue = (By.CSS_SELECTOR, "a[data-qa='continue-button']")
     btnLogout = (By.XPATH, "//ul[@class='nav navbar-nav']/li[4]")
     btnContactUs = (By.XPATH, "//ul[@class='nav navbar-nav']/li[8]")
+    btnTestCases = (By.XPATH, "//ul[@class='nav navbar-nav']/li[5]")
+    btnProducts = (By.XPATH, "//ul[@class='nav navbar-nav']/li[2]")
 
 
     def textHomeMethod(self):
@@ -40,5 +42,9 @@ class HomePage:
     def btnContactUsMethod(self):
         return self.driver.find_element(*HomePage.btnContactUs)
 
+    def btnTestCasesMethod(self):
+        return self.driver.find_element(*HomePage.btnTestCases)
 
+    def btnProductsMethod(self):
+        return self.driver.find_element(*HomePage.btnProducts)
 

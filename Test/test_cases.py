@@ -2,6 +2,8 @@ from pageObjectModel.AccountInformation import AccountInformation
 from pageObjectModel.HomePage import HomePage
 from pageObjectModel.Login import Login
 from pageObjectModel.ContactUs import ContactUs
+from pageObjectModel.TestCasesPage import TestCasesPage
+from pageObjectModel.Products import Products
 from utilities.BaseClass import BaseClass
 import pytest
 
@@ -18,6 +20,8 @@ class TestCases(BaseClass):
     login_sinUp_incorrect_text = "Email Address already exist!"
     title_ContactUs_text = "Get In Touch"
     contactUs_succes_txt = "Success! Your details have been submitted successfully."
+    test_cases_text = "Test Cases"
+    all_products_text = "All Products"
 
 
 
@@ -150,15 +154,56 @@ class TestCases(BaseClass):
         contactUs.textAreaMethod().send_keys("YAML es un acrónimo recursivo que significa YAML Ain't Markup Language (en castellano, ‘YAML no es un lenguaje de marcado’).1​ A comienzos de su desarrollo, YAML significaba Yet Another Markup Language (otro lenguaje de marcado más) para distinguir su propósito centrado en los datos en lugar del marcado de documentos. Sin embargo, dado que se usa frecuentemente XML para serializar datos y XML es un auténtico lenguaje de marcado de documentos, es razonable considerar YAML como un lenguaje de marcado ligero.")
         contactUs.btnUploadMethod().send_keys("C:\\Users\\USER\\Pictures\\Screenshots\\testing.JPG")
         contactUs.btnSubmitMethod().click()
-        alert = self.driver.switch_to.alert
-        alert.accept()
+        self.acceptAlert()
         textSucces = contactUs.txtSuccesMethod().text
         assert TestCases.contactUs_succes_txt == textSucces
         contactUs.btnHomeMethod().click()
         txtHome = homePage.textHomeMethod().text
         assert TestCases.home_text == txtHome
 
+    def test_cases_7_Verify_Test_Cases_Page(self):
+        homePage = HomePage(self.driver)
+        testCasesPage = TestCasesPage(self.driver)
 
+        txtHome = homePage.textHomeMethod().text
+        assert TestCases.home_text == txtHome
+        homePage.btnTestCasesMethod().click()
+        txtTestcases = testCasesPage.txtTestCasesMethod().text
+        assert self.test_cases_text == txtTestcases.title()
 
+    def test_Cases_8_Verify_All_Products_and_product_detail_page(self):
+        homePage = HomePage(self.driver)
+        products = Products(self.driver)
 
+        txtHome = homePage.textHomeMethod().text
+        assert TestCases.home_text == txtHome
+        homePage.btnProductsMethod().click()
+        txtAll_products = products.txtAllProductsMethod().text
+        assert self.all_products_text.upper() == txtAll_products
+        stock = products.productsMethod()
+
+        for product in stock:
+            if product == stock[0]:
+                self.scroll()
+                products.btnViewProductMethod().click()
+
+        products.nameProductMethod().is_displayed()
+        products.categoryProductMethod().is_displayed()
+        products.priceProductMethod().is_displayed()
+        products.availabilityProductMethod().is_displayed()
+        products.conditionProductMethod().is_displayed()
+        products.brandProductMethod().is_displayed()
+
+        name = products.nameProductMethod().text
+        print(f"Product: {name}")
+        category = products.categoryProductMethod().text
+        print(category)
+        price = products.priceProductMethod().text
+        print(f"Price: {price}")
+        availability = products.availabilityProductMethod().text
+        print(availability)
+        condition = products.conditionProductMethod().text
+        print(condition)
+        brand = products.brandProductMethod().text
+        print(brand)
 
