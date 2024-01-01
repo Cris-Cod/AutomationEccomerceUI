@@ -15,9 +15,16 @@ class BaseClass:
     def scroll(self):
         self.driver.execute_script("window.scrollBy(0, 600)")
 
+    def scroll1000(self):
+        self.driver.execute_script("window.scrollBy(0, 1400)")
+
     def verifyLinkPresence(self, text):
         wait = WebDriverWait(self.driver, 10)
         wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT, text)))
+
+    def verifyElementPresence(self, element, text):
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(expected_conditions.presence_of_element_located((element, text)))
 
     def acceptAlert(self):
         alert = self.driver.switch_to.alert

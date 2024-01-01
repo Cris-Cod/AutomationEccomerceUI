@@ -1,9 +1,12 @@
+from selenium.webdriver.common import keys
+
 from pageObjectModel.AccountInformation import AccountInformation
 from pageObjectModel.HomePage import HomePage
 from pageObjectModel.Login import Login
 from pageObjectModel.ContactUs import ContactUs
 from pageObjectModel.TestCasesPage import TestCasesPage
 from pageObjectModel.Products import Products
+from pageObjectModel.Cart import Cart
 from utilities.BaseClass import BaseClass
 import pytest
 
@@ -22,7 +25,9 @@ class TestCases(BaseClass):
     contactUs_succes_txt = "Success! Your details have been submitted successfully."
     test_cases_text = "Test Cases"
     all_products_text = "All Products"
-
+    searched_text = "Searched Products"
+    subscription_text = "Subscription"
+    subscription_cart_text = "Subscription"
 
 
     def test_cases_1_Register_User(self):
@@ -207,3 +212,54 @@ class TestCases(BaseClass):
         brand = products.brandProductMethod().text
         print(brand)
 
+    def test_cases_9_Search_Product(self):
+        searched_product = "Winter Top"
+
+        homePage = HomePage(self.driver)
+        products = Products(self.driver)
+
+        txtHome = homePage.textHomeMethod().text
+        assert TestCases.home_text == txtHome
+        homePage.btnProductsMethod().click()
+        txtAll_products = products.txtAllProductsMethod().text
+        assert self.all_products_text.upper() == txtAll_products
+        products.inputSearchMethod().send_keys(searched_product)
+        products.btnSearchMethod().click()
+        txtSearched = products.txtSearchedPMethod().text
+        assert self.searched_text.upper() == txtSearched
+        stock = products.productsMethod()
+
+        for product in stock:
+            text = products.txtMainProductMethod().text
+            assert searched_product == text
+
+    def test_cases_10_Verify_Subscription_in_home_page(self):
+        homePage = HomePage(self.driver)
+
+        txtHome = homePage.textHomeMethod().text
+        assert TestCases.home_text == txtHome
+        self.scroll1000()
+        txtSubscription = homePage.txtSubscriptionMethod().text
+        assert self.subscription_text.upper() == txtSubscription
+        homePage.inputSubscroptionMethod().send_keys("12345@gmail.com")
+        self.scroll()
+        homePage.btnSubscribeMethod().click()
+        homePage.txtSuccesMessageSubcriptionMethod().is_displayed()
+        textSucces = homePage.txtSuccesMessageSubcriptionMethod().text
+        print(textSucces)
+
+    def test_cases_11_Verify_Subscription_in_Cart_page(self):
+        homePage = HomePage(self.driver)
+        cart = Cart(self.driver)
+
+        txtHome = homePage.textHomeMethod().text
+        assert TestCases.home_text == txtHome
+        homePage.btnCartMethod().click()
+        self.scroll()
+        txtSubscription = cart.txtSubscriptionMethod().text
+        assert self.subscription_cart_text.upper() == txtSubscription
+        cart.inputSubscriptionMethod().send_keys("12345@gmail.com")
+        cart.btnSubscribeMethod().click()
+        cart.txtSuccessMethod().is_displayed()
+        txtSuccess = cart.txtSuccessMethod().text
+        print(txtSuccess)

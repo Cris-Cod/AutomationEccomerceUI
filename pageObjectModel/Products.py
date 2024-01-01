@@ -14,6 +14,11 @@ class Products:
     availabilityProduct = (By.XPATH, "//div[@class='product-information']/p[2]")
     conditionProduct = (By.XPATH, "//div[@class='product-information']/p[3]")
     brandProduct = (By.XPATH, "//div[@class='product-information']/p[4]")
+    inputSearch = (By.ID, "search_product")
+    btnSearch = (By.ID, "submit_search")
+    txtSearchedP = (By.XPATH, "//div[@class='features_items']/h2")
+    txtMainProduct = (By.XPATH, "//div[@class='product-image-wrapper']/div/div/p")
+
     def txtAllProductsMethod(self):
         return self.driver.find_element(*Products.txtAllProducts)
 
@@ -40,3 +45,15 @@ class Products:
 
     def brandProductMethod(self):
         return self.driver.find_element(*Products.brandProduct)
+
+    def inputSearchMethod(self):
+        return self.driver.find_element(*Products.inputSearch)
+
+    def btnSearchMethod(self):
+        return self.driver.find_element(*Products.btnSearch)
+
+    def txtSearchedPMethod(self):
+        return self.driver.find_element(*Products.txtSearchedP)
+
+    def txtMainProductMethod(self):
+        return self.driver.find_element(*Products.txtMainProduct)

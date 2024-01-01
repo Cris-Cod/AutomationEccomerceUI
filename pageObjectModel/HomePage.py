@@ -16,7 +16,11 @@ class HomePage:
     btnContactUs = (By.XPATH, "//ul[@class='nav navbar-nav']/li[8]")
     btnTestCases = (By.XPATH, "//ul[@class='nav navbar-nav']/li[5]")
     btnProducts = (By.XPATH, "//ul[@class='nav navbar-nav']/li[2]")
-
+    txtSubscription = (By.XPATH, "//div[@class='footer-widget']/div/div/div[2]/div/h2")
+    inputSubscroption = (By.ID, "susbscribe_email")
+    btnSubscribe = (By.ID, "subscribe")
+    txtSuccesMessageSubcription = (By.XPATH, "//div[@class='alert-success alert']")
+    btnCart = (By.XPATH, "//ul[@class='nav navbar-nav']/li[3]")
 
     def textHomeMethod(self):
         return self.driver.find_element(*HomePage.textHome)
@@ -48,3 +52,17 @@ class HomePage:
     def btnProductsMethod(self):
         return self.driver.find_element(*HomePage.btnProducts)
 
+    def txtSubscriptionMethod(self):
+        return self.driver.find_element(*HomePage.txtSubscription)
+
+    def inputSubscroptionMethod(self):
+        return self.driver.find_element(*HomePage.inputSubscroption)
+
+    def btnSubscribeMethod(self):
+        return self.driver.find_element(*HomePage.btnSubscribe)
+
+    def txtSuccesMessageSubcriptionMethod(self):
+        return self.driver.find_element(*HomePage.txtSuccesMessageSubcription)
+
+    def btnCartMethod(self):
+        return self.driver.find_element(*HomePage.btnCart)
